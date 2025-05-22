@@ -1,4 +1,4 @@
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from "@tailwindcss/vite"
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -31,4 +31,10 @@ export default defineNuxtConfig({
     prefix: "",
     componentDir: "components/ui",
   },
-});
+  runtimeConfig: {
+    public: {
+      imageUrl: "http://localhost:8080/api",
+    },
+  },
+})
+

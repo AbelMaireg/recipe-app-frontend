@@ -1,6 +1,7 @@
 <template>
   <Card
-    class="w-80 h-96 p-0 overflow-hidden bg-red-50 dark:bg-red-950 shadow-lg transition-shadow hover:shadow-xl rounded-lg"
+    class="w-80 h-96 p-0 overflow-hidden bg-red-50 dark:bg-red-950 shadow-lg transition-shadow hover:shadow-xl rounded-lg cursor-pointer"
+    @click="goToRecipe"
   >
     <img
       :src="thumbnail"
@@ -14,7 +15,7 @@
       </CardTitle>
       <div class="flex items-center gap-2">
         <span class="text-sm text-muted-foreground">
-          By {{ recipe.author }}
+          By {{ recipe.creator.name }}
         </span>
       </div>
       <div class="flex items-center gap-1">
@@ -39,6 +40,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue"
+import { useRouter } from "vue-router"
 import { Card, CardContent, CardTitle } from "@/components/ui/card"
 import type Recipe from "@/types/recipe"
 
@@ -46,14 +48,18 @@ const props = defineProps<{
   recipe: Recipe
 }>()
 
+const router = useRouter()
 const thumbnail = ref<string>("")
 const formattedDate = ref("")
 
 onMounted(() => {
   thumbnail.value = getImageUrl(props.recipe.thumbnail)
   formattedDate.value = formatDate(props.recipe.createdAt)
-  console.log(thumbnail.value)
 })
+
+function goToRecipe() {
+  router.push(`/recipe/${props.recipe.id}`)
+}
 </script>
 
 <style scoped>

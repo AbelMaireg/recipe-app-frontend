@@ -204,7 +204,7 @@ watchOnce(emblaMainApi, (emblaMainApi) => {
         </div>
 
         <Table>
-          <TableCaption>A list of your recent invoices.</TableCaption>
+          <TableCaption>A list of ingredients.</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead> Name </TableHead>

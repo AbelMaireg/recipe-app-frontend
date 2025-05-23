@@ -44,21 +44,19 @@ import { useRouter } from "vue-router"
 import { Card, CardContent, CardTitle } from "@/components/ui/card"
 import type Recipe from "@/types/recipe"
 
-const props = defineProps<{
-  recipe: Recipe
-}>()
+const recipe = defineModel<Recipe>("recipe", { required: true })
 
 const router = useRouter()
 const thumbnail = ref<string>("")
 const formattedDate = ref("")
 
 onMounted(() => {
-  thumbnail.value = getImageUrl(props.recipe.thumbnail)
-  formattedDate.value = formatDate(props.recipe.createdAt)
+  thumbnail.value = getImageUrl(recipe.value.thumbnail)
+  formattedDate.value = formatDate(recipe.value.createdAt)
 })
 
 function goToRecipe() {
-  router.push(`/recipe/${props.recipe.id}`)
+  router.push(`/recipe/${recipe.value.id}`)
 }
 </script>
 
